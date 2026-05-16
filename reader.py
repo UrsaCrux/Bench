@@ -38,7 +38,6 @@ def plot_data(data):
     plt.savefig(OUTPUT_DIR / "data_plot.png")
     plt.show()
 
-
 async def save_checkpoint(data):
     filename = get_name(data)
     filepath = OUTPUT_DIR / filename
@@ -58,8 +57,8 @@ data = []
 checkpoint = []
 time_checkpoint = SAVE_EVERY_SECONDS
 
-while CHANNEL.readline().strip() != "BEGIN":
-    pass
+while (info:= CHANNEL.readline().strip().decode("utf-8")) != "BEGIN":
+    print(info)
 
 try: 
     while value:= CHANNEL.readline():
