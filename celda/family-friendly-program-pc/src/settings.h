@@ -6,7 +6,9 @@
 #define BAUD_RATE 115200
 
 #define B_SENS "Start"
+#define B_STOP "STOP"
 #define B_CALI "Calibrar"
 #define B_EXPO "Exportar a Excel"
+#define B_CONE "Conectar"
 
-
+#define O_PATH "output_csv"

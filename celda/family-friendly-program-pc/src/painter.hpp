@@ -8,6 +8,7 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include <atomic>
 
 #include "connection.hpp"
 
@@ -18,16 +19,17 @@ class painter : public QWidget
 	painter(QWidget *parent);
 
 	serial_listener *listen;
-	//QPainter painter_n;
+	
 	QPen pen;
 	QBrush brush;
 	
-	bool drawing = false;
+	std::atomic_flag drawing;
 
 	float max_ = 10.0;
 	float roof = 100.0;
 	int steps_v = 10;
 	int steps_h = 10;
+	int max_num = 250;
 
 	std::vector<int> numbers;
 

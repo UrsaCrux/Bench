@@ -10,7 +10,6 @@
 #include <thread>
 #include <atomic>
 
-
 class serial_listener : public itas109::CSerialPortListener {
 public:
 	bool new_read = false;
@@ -30,7 +29,6 @@ private:
 	std::stringstream accumulator;
 };
 
-
 class connection
 {
  public:
@@ -40,8 +38,11 @@ class connection
 	const char init_command = 192;
 	std::thread thread_coms;
 	
+	serial_listener* listener;
 	
 	bool init_search();
+	std::vector<std::string> get_ports();
+	bool connect_port(std::string s);
 	bool open_port();
 	bool init_connection(serial_listener *n);
 	void send_command(std::string command_name, std::string parameter);
@@ -52,6 +53,7 @@ class connection
 	std::atomic<std::string*> comm_a, param_a;
 	std::atomic_flag comm_flag = ATOMIC_FLAG_INIT;
 	std::atomic_flag new_comm_flag = ATOMIC_FLAG_INIT;
+	bool try_connect_esp();
 	
 };
 

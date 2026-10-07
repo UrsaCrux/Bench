@@ -9,6 +9,7 @@
 #include <QMessageBox>
 
 #include <atomic>
+#include <functional>
 
 #include "painter.hpp"
 #include "choosing.hpp"
@@ -17,7 +18,10 @@ class main_window : public QMainWindow
 {
 	Q_OBJECT
  public:
-	main_window(QWidget *parent = nullptr);
+	main_window(connection &con, int *sett, QWidget *parent = nullptr);
+
+	void activate_s();
+	void activate_e();
 
 	QWidget *central_widget;
 
@@ -28,6 +32,8 @@ class main_window : public QMainWindow
 	QPushButton *button_expo;
 
 	painter *painter_;
+
+	int *settle;
 	
  private:
 	//QWidget *panel;
