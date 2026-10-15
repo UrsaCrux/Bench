@@ -38,14 +38,18 @@ void warn_send(std::string mes, std::string title = "Alerta"){
 }
 
 void info_send(std::string mes, std::string title = "Info"){
-	QMessageBox::information(
+	/*QMessageBox::information(
 				 nullptr,
 				 QString::fromStdString(title),
 				 QString::fromStdString(mes)
-				 );
+				 );*/
+	QMessageBox msgbox(window);
+	msgbox.setText(QString::fromStdString(mes));
+	msgbox.exec();
+	
 }
 
-void export_numbers_to_csv(std::vector<int> n){
+bool export_numbers_to_csv(std::vector<int> n){
 	try{
 		
 	std::filesystem::path dir_p = O_PATH;
@@ -65,7 +69,7 @@ void export_numbers_to_csv(std::vector<int> n){
 
 	if (!file.is_open()){
 		std::cout << "- Fallo al crear el archivo!" << std::endl;
-		return;
+		return false;;
 	}
 
 	//titulos de columnas:
@@ -80,17 +84,25 @@ void export_numbers_to_csv(std::vector<int> n){
 	std::cout << "- Se creó el archivo csv: " << file_p << std::endl;
 	info_send(std::string("Se creó exitosamente el archivo: ") + buffer_t);
 	}
+	
 	catch(const std::filesystem::filesystem_error& e){
 		std::cerr << "- Filesystem error: " << e.what() << std::endl;
+		return false;
 	}
 	
-	return;
+	return true;
 }
 
 void connection_export(){
-	std::thread ex_tr(export_numbers_to_csv, *numbers);
+	//std::thread ex_tr(export_numbers_to_csv, *numbers);
 
-	ex_tr.detach();
+	//ex_tr.detach();
+
+	if (!export_numbers_to_csv(*numbers)){
+		warn_send(std::string("Hubo un error al guardar el arhivo!"));
+		return;
+	}
+
 }
 
 void activate_export(){
