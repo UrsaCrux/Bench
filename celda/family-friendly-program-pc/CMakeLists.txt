@@ -8,6 +8,13 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+#added for static link of libraries
+
+#set(CMAKE_EXE_LINKER_FLAGS "-static")
+#set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+
+#----------------------------------
+
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(CSerialPort REQUIRED)
 
