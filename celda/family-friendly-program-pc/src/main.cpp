@@ -63,7 +63,7 @@ bool export_numbers_to_csv(std::vector<int> n){
 	}
 
 	char buffer_t[80];
-	std::strftime(buffer_t, sizeof(buffer_t), "output-%d-%m-(%H:%M:%S).csv", local_time);
+	std::strftime(buffer_t, sizeof(buffer_t), "output-%d-%m-(%H-%M-%S).csv", local_time);
 	std::filesystem::path file_p = dir_p / buffer_t;
 	std::ofstream file(file_p);
 
